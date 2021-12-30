@@ -52,8 +52,8 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  trips         Trip[]
   role          String    @default("user")
+  Project       Project[]
 }
 
 model VerificationToken {
@@ -64,15 +64,16 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-model Trip {
-  id          String   @id @default(cuid())
-  destination String
-  comment     String?
-  startDate   DateTime
-  endDate     DateTime
-
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId String
+model Project {
+  id              String  @id @default(cuid())
+  name            String
+  description     String?
+  type            String  @default("url")
+  value           String
+  backgroundColor String?
+  qrColor         String?
+  ownerId         String
+  owner           User    @relation(fields: [ownerId], references: [id], onDelete: Cascade)
 }
 
 // User must be able to create an account and log in. (If a mobile application, this means that more users can use the app from the same phone).
