@@ -53,6 +53,8 @@ const EditProjectDialog = ({
     defaultValues: initialValues,
   })
 
+  console.log(errors)
+
   useEffect(() => {
     if (initialValues) {
       setType(initialValues.type)

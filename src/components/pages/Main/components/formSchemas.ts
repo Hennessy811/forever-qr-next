@@ -14,9 +14,9 @@ export const emailSchema = yup.object().shape({
 
 export const wifiSchema = yup.object().shape({
   name: yup.string().min(2).required("Project name is required"),
-  ssid: yup.string().required(),
-  password: yup.string().required(),
-  type: yup.string().required(),
+  wifiSsid: yup.string().required(),
+  wifiPass: yup.string().required(),
+  wifiType: yup.string().required(),
 })
 
 export const phoneSchema = yup.object().shape({
