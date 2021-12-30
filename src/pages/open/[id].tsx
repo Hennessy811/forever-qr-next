@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react"
 
 import { ClipboardCopyIcon } from "@heroicons/react/outline"
 import { useRouter } from "next/router"
+import { useQRCode } from "react-qrcodes"
 import { useCopyToClipboard } from "react-use"
 
+import { basePath } from "@components/pages/Main/components/Project"
+import { decodeAddress } from "@utils/qrEncoder"
 import trpc from "@utils/trpc"
 
 interface CopierProps {
@@ -46,6 +49,23 @@ const Opener = () => {
     { id: (query.id as string) || "" },
   ])
 
+  const link = `${basePath}/open/${query.id}`
+  const [inputRef] = useQRCode({
+    text: link,
+    options: {
+      type: "image/jpeg",
+      quality: 0.3,
+      level: "M",
+      margin: 3,
+      scale: 4,
+      width: 250,
+      color: {
+        dark: project.data?.qrColor || "#000000",
+        light: project.data?.backgroundColor || "#ffffff",
+      },
+    },
+  })
+
   useEffect(() => {
     if (project.data?.type !== "wifi" && project.data?.value) {
       window.location.replace(project.data?.value)
@@ -66,22 +86,22 @@ const Opener = () => {
         <div className="my-4">
           <span className="text-sm font-bold text-gray-700">SSID</span>
           <div className="relative w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none bg-gray-50">
-            {/* {currentProject.wifi.ssid}
-            <Copier value={currentProject.wifi.ssid} /> */}
+            {decodeAddress(project.data?.value)?.wifiSsid}
+            <Copier value={decodeAddress(project.data?.value)?.wifiSsid} />
           </div>
         </div>
         <div className="my-4">
           <span className="text-sm font-bold text-gray-700">Password</span>
           <div className="relative w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none bg-gray-50">
-            {/* {currentProject.wifi.password}
+            {decodeAddress(project.data?.value)?.wifiPass}
 
-            <Copier value={currentProject.wifi.password} /> */}
+            <Copier value={decodeAddress(project.data?.value)?.wifiPass} />
           </div>
         </div>
         <div className="my-4">
           <span className="text-sm font-bold text-gray-700">Network type</span>
           <div className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none bg-gray-50">
-            {/* {currentProject.wifi.type} */}
+            {decodeAddress(project.data?.value)?.wifiType}
           </div>
         </div>
 
@@ -91,10 +111,11 @@ const Opener = () => {
             <span className="text-sm text-gray-400">
               (yes, one more QR code)
             </span>{" "}
-            will help you
+            will help you to connect directly:
           </span>
 
-          {/* <img ref={inputRef} alt="helper qr code" /> */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img ref={inputRef as any} alt="helper qr code" />
         </div>
       </div>
     )
