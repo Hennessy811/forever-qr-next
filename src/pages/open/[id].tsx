@@ -46,7 +46,7 @@ const Opener = () => {
   ])
 
   const [inputRef] = useQRCode({
-    text: project.data?.value,
+    text: project.data?.value || "",
     options: {
       type: "image/jpeg",
       quality: 0.3,
