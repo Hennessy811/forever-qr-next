@@ -26,7 +26,7 @@ const MyApp: AppType = ({
 const getBaseUrl = () =>
   process.env.NODE_ENV === "development"
     ? "http://localhost:3000"
-    : `https://travel-plan-prisma.vercel.app`
+    : `https://dynastic-qr.vercel.app`
 
 export default withTRPC<AppRouter>({
   config({ ctx }) {
