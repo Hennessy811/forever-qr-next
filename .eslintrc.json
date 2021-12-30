@@ -13,6 +13,7 @@
     "node": true
   },
   "rules": {
+    "tailwind/class-order": 0,
     "no-unused-vars": "off",
     "react/require-default-props": 0,
     "unused-imports/no-unused-imports": "error",

@@ -5,6 +5,18 @@
 /* purgecss end ignore */
 @tailwind utilities;
 
+// .input {
+//   @apply w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline;
+// }
+
+// .input-error {
+//   @apply text-red-500 font-light;
+// }
+
+// .input-label {
+//   @apply block mb-2 text-sm font-bold text-gray-700;
+// }
+
 /* purgecss start ignore */
 html {
   @apply antialiased;
