@@ -31,7 +31,7 @@ interface Props {
   onEdit: () => void
 }
 
-const basePath =
+export const basePath =
   process.env.NODE_ENV === "development"
     ? "http://localhost:3000"
     : process.env.VERCEL_URL || "https://dynastic-qr.vercel.app"
