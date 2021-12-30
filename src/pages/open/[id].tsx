@@ -5,7 +5,6 @@ import { useRouter } from "next/router"
 import { useQRCode } from "react-qrcodes"
 import { useCopyToClipboard } from "react-use"
 
-import { basePath } from "@components/pages/Main/components/Project"
 import { decodeAddress } from "@utils/qrEncoder"
 import trpc from "@utils/trpc"
 
@@ -29,10 +28,7 @@ const Copier = ({ value }: CopierProps) => {
   }
 
   return (
-    <div className="has-tooltip">
-      <span className="right-0 px-3 py-1 -mt-16 text-base font-normal text-gray-100 bg-gray-700 rounded-md shadow-lg tooltip">
-        {!v ? "Copy to clipboard" : `Copied ${v}`}
-      </span>
+    <div className="">
       <ClipboardCopyIcon
         className="absolute w-5 h-5 cursor-pointer top-2 right-4"
         onClick={() => copy()}
@@ -49,9 +45,8 @@ const Opener = () => {
     { id: (query.id as string) || "" },
   ])
 
-  const link = `${basePath}/open/${query.id}`
   const [inputRef] = useQRCode({
-    text: link,
+    text: project.data?.value,
     options: {
       type: "image/jpeg",
       quality: 0.3,

@@ -1,3 +1,5 @@
+import { last } from "lodash"
+
 import { Values } from "@components/pages/Main/components/Project"
 
 export const generateAddress = (values: Values) => {
@@ -33,10 +35,10 @@ export const decodeAddress = (link: string): Values => {
 
   if (link.startsWith("WIFI:")) {
     res.type = "wifi"
-    const [, wifiType, wifiSsid, wifiPass] = link.split(":")
-    res.wifiType = wifiType
-    res.wifiSsid = wifiSsid
-    res.wifiPass = wifiPass
+    const [wifiType, wifiSsid, wifiPass] = link.split(";")
+    res.wifiType = last(wifiType.split(":"))!
+    res.wifiSsid = last(wifiSsid.split(":"))!
+    res.wifiPass = last(wifiPass.split(":"))!
   } else if (link.startsWith("tel:")) {
     res.type = "phone"
     res.phone = link.slice(4)
