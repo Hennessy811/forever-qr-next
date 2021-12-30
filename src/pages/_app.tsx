@@ -2,20 +2,24 @@ import { httpBatchLink } from "@trpc/client/links/httpBatchLink"
 import { loggerLink } from "@trpc/client/links/loggerLink"
 import { withTRPC } from "@trpc/next"
 import { SessionProvider } from "next-auth/react"
+import PlausibleProvider from "next-plausible"
 import { AppType } from "next/dist/shared/lib/utils"
 import superjson from "superjson"
 
 import { AppRouter } from "@backend/router"
 
 import "../styles/tailwind.scss"
+
 const MyApp: AppType = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
   return (
-    <SessionProvider session={session}>
-      <Component {...pageProps} />
-    </SessionProvider>
+    <PlausibleProvider domain="dynastic-qr.vercel.app">
+      <SessionProvider session={session}>
+        <Component {...pageProps} />
+      </SessionProvider>
+    </PlausibleProvider>
   )
 }
 

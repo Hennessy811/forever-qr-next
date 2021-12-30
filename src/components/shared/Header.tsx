@@ -17,7 +17,7 @@ const Header = () => {
       <div>
         <Link href="/">
           <a>
-            <span className="text-xl font-bold">Travel Plans</span>
+            <span className="text-xl font-bold">Dynastic QR</span>
           </a>
         </Link>
       </div>
